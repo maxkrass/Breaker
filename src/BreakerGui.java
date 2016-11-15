@@ -125,8 +125,8 @@ class BreakerGui implements ChangeListener, ActionListener {
 
 	private void evaluate() {
 		Fraction result = new Fraction(0, 0);
-		switch (String.valueOf(operatorsBox.getSelectedItem())) {
-			case "+":
+		switch (operatorsBox.getSelectedIndex()) {
+			case 0:
 				result = tools.add(
 						new Fraction(
 								(int) mNumerator1.getModel().getValue(),
@@ -135,7 +135,7 @@ class BreakerGui implements ChangeListener, ActionListener {
 								(int) mNumerator2.getModel().getValue(),
 								(int) mDenominator2.getModel().getValue()));
 				break;
-			case "-":
+			case 1:
 				result = tools.subtract(
 						new Fraction(
 								(int) mNumerator1.getModel().getValue(),
@@ -144,7 +144,7 @@ class BreakerGui implements ChangeListener, ActionListener {
 								(int) mNumerator2.getModel().getValue(),
 								(int) mDenominator2.getModel().getValue()));
 				break;
-			case "×":
+			case 2:
 				result = tools.multiply(
 						new Fraction(
 								(int) mNumerator1.getModel().getValue(),
@@ -153,7 +153,7 @@ class BreakerGui implements ChangeListener, ActionListener {
 								(int) mNumerator2.getModel().getValue(),
 								(int) mDenominator2.getModel().getValue()));
 				break;
-			case "÷":
+			case 3:
 				result = tools.divide(
 						new Fraction(
 								(int) mNumerator1.getModel().getValue(),
