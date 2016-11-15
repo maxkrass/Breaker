@@ -18,12 +18,24 @@ class GUI {
         JFrame frame = new JFrame("Bruchrechnen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        	JLabel gleichzeichen = new JLabel("=");
+       	JPanel panel = new JPanel();
         //VVVVVVVVVVVVVVVVVVVVVVVVVV
-	zähler1.setPosition(0,0); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<das da
+	//zähler1.setPosition(0,0); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<das da
         //AAAAAAAAAAAAAAAAAAAAAAAAAA
-        frame.setSize(600, 480);
+	
+       	panel.add(zähler1);
+       	frame.getContentPane().add(panel);
+       	
+       	Insets insets = panel.getInsets();
+       	Dimension size = zähler1.getPreferredSize();
+       	zähler1.setBounds(25 + insets.left, 5 + insets.top,
+       	             size.width, size.height);
+       	
+       	panel.setLayout(null);
+       	insets = frame.getInsets();
+        frame.setSize(600 + insets.left + insets.right, 480 + insets.top + insets.bottom);
         frame.setVisible(true);
-        frame.pack();
+        //frame.pack();
     }
 	// TODO Button 
     /*
@@ -78,7 +90,7 @@ class GUI {
     }
 
     private void ergebnisse(Bruchrechnen bruch) {
-        ergebniszähler.setText(String.valueOf(bruch.getzaehler()));
-        ergebnisnenner.setText(String.valueOf(bruch.getnenner()));
+       // ergebniszähler.setText(String.valueOf(bruch.getzaehler()));
+       // ergebnisnenner.setText(String.valueOf(bruch.getnenner()));
     }
 }
