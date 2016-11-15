@@ -13,7 +13,7 @@ class GUI {
     private JLabel ergebniszähler = new JLabel();
     private JLabel ergebnisnenner = new JLabel();
     private JTextField matheaufgabe = new JTextField("+", 3);
-
+        // alles dynamische statisch machen
     GUI() {
         JFrame frame = new JFrame("Bruchrechnen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,11 +21,12 @@ class GUI {
         JPanel bruchstrich1 = new JPanel();
         JPanel bruchstrich2 = new JPanel();
         JPanel bruchstrich3 = new JPanel();
-
+        //wie das:
         ergebniszähler.setAlignmentX(Component.CENTER_ALIGNMENT);
         ergebnisnenner.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JSeparator separator1 = new JSeparator(SwingConstants.HORIZONTAL);
+        //und das:
         separator1.setMaximumSize(new Dimension(150, 1));
         separator1.setForeground(Color.black);
         separator1.setBackground(Color.BLACK);
@@ -63,6 +64,7 @@ class GUI {
     }
 
     /*
+    Auf button zuschneiden
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
     evaluate();
