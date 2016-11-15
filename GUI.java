@@ -17,9 +17,10 @@ class GUI {
     GUI() {
         JFrame frame = new JFrame("Bruchrechnen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JLabel gleichzeichen = new JLabel("=");
-        //zähler1.setPosition(0,0);
-        
+       	JLabel gleichzeichen = new JLabel("=");
+        //VVVVVVVVVVVVVVVVVVVVVVVVVV
+	zähler1.setPosition(0,0); //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<das da
+        //AAAAAAAAAAAAAAAAAAAAAAAAAA
         frame.setSize(600, 480);
         frame.setVisible(true);
         frame.pack();
