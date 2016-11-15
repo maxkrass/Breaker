@@ -21,19 +21,9 @@ class GUI {
         JPanel bruchstrich1 = new JPanel();
         JPanel bruchstrich2 = new JPanel();
         JPanel bruchstrich3 = new JPanel();
-        //wie das:
+        
         ergebniszähler.setAlignmentX(Component.CENTER_ALIGNMENT);
         ergebnisnenner.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JSeparator separator1 = new JSeparator(SwingConstants.HORIZONTAL);
-        //und das:
-        separator1.setMaximumSize(new Dimension(150, 1));
-        separator1.setForeground(Color.black);
-        separator1.setBackground(Color.BLACK);
-        JSeparator separator2 = new JSeparator(SwingConstants.HORIZONTAL);
-        separator2.setMaximumSize(new Dimension(150, 1));
-        separator2.setForeground(Color.black);
-        separator2.setBackground(Color.BLACK);
 
         bruchstrich1.add(zähler1);
         bruchstrich1.add(separator1);
@@ -63,56 +53,55 @@ class GUI {
         frame.pack();
     }
 
-    /*
-    Auf button zuschneiden
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-    evaluate();
+    zeige();
     }
-    /*
-    private void evaluate() {
-    Bruchrechnen result = new Bruchrechnen(0, 0);
-    switch (String.valueOf(operatorsBox.getSelectedItem())) {
-    case "+":
-    result = mathe.add(
-    new Bruchrechnen(
-    (int) zähler1.getModel().getValue(),
-    (int) nenner1.getModel().getValue()),
-    new Bruchrechnen(
-    (int) zähler2.getModel().getValue(),
-    (int) nenner2.getModel().getValue()));
-    break;
-    case "-":
-    result = mathe.subtract(
-    new Bruchrechnen(
-    (int) zähler1.getModel().getValue(),
-    (int) nenner1.getModel().getValue()),
-    new Bruchrechnen(
-    (int) zähler2.getModel().getValue(),
-    (int) nenner2.getModel().getValue()));
-    break;
-    case "×":
-    result = mathe.multiply(
-    new Bruchrechnen(
-    (int) zähler1.getModel().getValue(),
-    (int) nenner1.getModel().getValue()),
-    new Bruchrechnen(
-    (int) zähler2.getModel().getValue(),
-    (int) nenner2.getModel().getValue()));
-    break;
-    case "÷":
-    result = mathe.divide(
-    new Bruchrechnen(
-    (int) zähler1.getModel().getValue(),
-    (int) nenner1.getModel().getValue()),
-    new Bruchrechnen(
-    (int) zähler2.getModel().getValue(),
-    (int) nenner2.getModel().getValue()));
-    break;
-    }
+    
+    private void zeige() {
+    Bruchrechnen ergebnis = new Bruchrechnen(0,0);
+        if (matheaufgabe.getText()=="plus")
+        {
+            ergebnis = mathe.plus(
+						new Bruchrechnen(
+								Integer.parseInt(zähler1.getText()),
+								Integer.parseInt(nenner1.getText())),
+						new Bruchrechnen(
+								Integer.parseInt(zähler2.getText()),
+								Integer.parseInt(nenner2.getText())));
+        }
+        if (matheaufgabe.getText()=="minus")
+        {
+            ergebnis = mathe.minus(
+						new Bruchrechnen(
+								Integer.parseInt(zähler1.getText()),
+								Integer.parseInt(nenner1.getText())),
+						new Bruchrechnen(
+								Integer.parseInt(zähler2.getText()),
+								Integer.parseInt(nenner2.getText())));
+        }
+        if (matheaufgabe.getText()=="mal")
+        {
+            ergebnis = mathe.malnehmen(
+						new Bruchrechnen(
+								Integer.parseInt(zähler1.getText()),
+								Integer.parseInt(nenner1.getText())),
+						new Bruchrechnen(
+								Integer.parseInt(zähler2.getText()),
+								Integer.parseInt(nenner2.getText())));
+        }
+        if (matheaufgabe.getText()=="geteilt")
+        {
+            ergebnis = mathe.geteilt(
+						new Bruchrechnen(
+								Integer.parseInt(zähler1.getText()),
+								Integer.parseInt(nenner1.getText())),
+						new Bruchrechnen(
+								Integer.parseInt(zähler2.getText()),
+								Integer.parseInt(nenner2.getText())));
+        }
     displayResult(result);
     }
-     */
 
     private void ergebnisse(Bruchrechnen fraction) {
         ergebniszähler.setText(String.valueOf(fraction.getzaehler()));
