@@ -29,12 +29,11 @@ public class Fraction {
 			if ((denominator % i == 0) && (numerator % i == 0)) {
 				denominator /= i;
 				numerator /= i;
-				//System.out.println("gekürzt mit " + i);
-				reduce();
+				System.out.println("gekürzt mit " + i);
 			}
 		}
-		//System.out.print(denominator);
-		//System.out.print("∕");
-		//System.out.println(numerator);
+		System.out.println(numerator);
+		System.out.print("∕");
+		System.out.print(denominator);
 	}
 }
