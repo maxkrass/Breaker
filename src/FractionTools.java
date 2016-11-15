@@ -8,9 +8,7 @@ class FractionTools {
 
 	Fraction add(Fraction fraction1, Fraction fraction2) {
 
-		if (fraction1.getDenominator() != fraction2.getDenominator())
-			normalize(fraction1, fraction2);
-
+		normalize(fraction1, fraction2);
 		Fraction result = new Fraction(fraction1.getNumerator() + fraction2.getNumerator(), fraction1.getDenominator());
 		result.reduce();
 
@@ -20,9 +18,7 @@ class FractionTools {
 
 	Fraction subtract(Fraction fraction1, Fraction fraction2) {
 
-		if (fraction1.getDenominator() != fraction2.getDenominator())
-			normalize(fraction1, fraction2);
-
+		normalize(fraction1, fraction2);
 		Fraction result = new Fraction(fraction1.getNumerator() - fraction2.getNumerator(), fraction1.getDenominator());
 		result.reduce();
 
