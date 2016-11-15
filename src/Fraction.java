@@ -32,8 +32,8 @@ public class Fraction {
 				System.out.println("gekürzt mit " + i);
 			}
 		}
-		System.out.print(denominator);
-		System.out.print("∕");
 		System.out.println(numerator);
+		System.out.print("∕");
+		System.out.print(denominator);
 	}
 }
