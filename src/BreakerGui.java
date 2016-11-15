@@ -110,6 +110,7 @@ class BreakerGui implements ChangeListener, ActionListener {
 		frame.setSize(600, 480);
 		frame.setVisible(true);
 		frame.pack();
+		evaluate();
 	}
 
 	@Override
