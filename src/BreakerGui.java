@@ -10,10 +10,7 @@ import java.awt.event.ActionListener;
  */
 class BreakerGui implements ChangeListener, ActionListener {
 
-	private JPanel mMainPanel = new JPanel();
-	private JPanel mFirstFractionPanel = new JPanel();
-	private JPanel mSecondFractionPanel = new JPanel();
-	private JPanel mResultPanel = new JPanel();
+	private FractionTools tools = new FractionTools();
 	private JSpinner mNumerator1 = new JSpinner();
 	private JSpinner mNumerator2 = new JSpinner();
 	private JSpinner mDenominator1 = new JSpinner();
@@ -22,12 +19,13 @@ class BreakerGui implements ChangeListener, ActionListener {
 	private JLabel mResultDenominator = new JLabel("0");
 	private String[] operations = { "+", "-", "×", "÷" };
 	private JComboBox<String> operatorsBox = new JComboBox<>(operations);
-	private String selectedOperator = "+";
 
 	BreakerGui() {
 		JFrame frame = new JFrame("Breaker");
 		JLabel equals = new JLabel("=");
-		selectedOperator = String.valueOf(operatorsBox.getSelectedItem());
+		JPanel mFirstFractionPanel = new JPanel();
+		JPanel mSecondFractionPanel = new JPanel();
+		JPanel mResultPanel = new JPanel();
 
 		equals.setFont(equals.getFont().deriveFont(36f));
 		operatorsBox.setFont(operatorsBox.getFont().deriveFont(36f));
@@ -75,6 +73,7 @@ class BreakerGui implements ChangeListener, ActionListener {
 		mResultPanel.add(new JSeparator(SwingConstants.HORIZONTAL));
 		mResultPanel.add(mResultDenominator);
 
+		JPanel mMainPanel = new JPanel();
 		mMainPanel.setLayout(new BoxLayout(mMainPanel, BoxLayout.X_AXIS));
 		mFirstFractionPanel.setLayout(new BoxLayout(mFirstFractionPanel, BoxLayout.Y_AXIS));
 		mSecondFractionPanel.setLayout(new BoxLayout(mSecondFractionPanel, BoxLayout.Y_AXIS));
@@ -102,7 +101,51 @@ class BreakerGui implements ChangeListener, ActionListener {
 		evaluate();
 	}
 
-	void evaluate() {
+	private void evaluate() {
+		Fraction result = new Fraction(0, 0);
+		switch (String.valueOf(operatorsBox.getSelectedItem())) {
+			case "+":
+				result = tools.add(
+						new Fraction(
+								(int) mNumerator1.getModel().getValue(),
+								(int) mDenominator1.getModel().getValue()),
+						new Fraction(
+								(int) mNumerator2.getModel().getValue(),
+								(int) mDenominator2.getModel().getValue()));
+				break;
+			case "-":
+				result = tools.subtract(
+						new Fraction(
+								(int) mNumerator1.getModel().getValue(),
+								(int) mDenominator1.getModel().getValue()),
+						new Fraction(
+								(int) mNumerator2.getModel().getValue(),
+								(int) mDenominator2.getModel().getValue()));
+				break;
+			case "×":
+				result = tools.multiply(
+						new Fraction(
+								(int) mNumerator1.getModel().getValue(),
+								(int) mDenominator1.getModel().getValue()),
+						new Fraction(
+								(int) mNumerator2.getModel().getValue(),
+								(int) mDenominator2.getModel().getValue()));
+				break;
+			case "÷":
+				result = tools.divide(
+						new Fraction(
+								(int) mNumerator1.getModel().getValue(),
+								(int) mDenominator1.getModel().getValue()),
+						new Fraction(
+								(int) mNumerator2.getModel().getValue(),
+								(int) mDenominator2.getModel().getValue()));
+				break;
+		}
+		displayResult(result);
+	}
 
+	private void displayResult(Fraction fraction) {
+		mResultNumerator.setText(String.valueOf(fraction.getNumerator()));
+		mResultDenominator.setText(String.valueOf(fraction.getDenominator()));
 	}
 }
