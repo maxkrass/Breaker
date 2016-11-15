@@ -100,7 +100,7 @@ class GUI {
 								Integer.parseInt(zähler2.getText()),
 								Integer.parseInt(nenner2.getText())));
         }
-    displayResult(result);
+    ergebnisse(ergebnis);
     }
 
     private void ergebnisse(Bruchrechnen fraction) {
