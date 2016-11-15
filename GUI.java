@@ -6,12 +6,13 @@ import java.awt.event.ActionListener;
 class GUI {
 
     private Mathematik mathe = new Mathematik();
-    private JSpinner zähler1 = new JSpinner();
-    private JSpinner zähler2 = new JSpinner();
-    private JSpinner nenner1 = new JSpinner();
-    private JSpinner nenner2 = new JSpinner();
+    private JTextField zähler1 = new JTextField("1",5);
+    private JTextField zähler2 = new JTextField("1",5);
+    private JTextField nenner1 = new JTextField("1",5);
+    private JTextField nenner2 = new JTextField("1",5);
     private JLabel ergebniszähler = new JLabel();
     private JLabel ergebnisnenner = new JLabel();
+    private JTextField matheaufgabe = new JTextField("+", 3);
 
     GUI() {
         JFrame frame = new JFrame("Bruchrechnen");
