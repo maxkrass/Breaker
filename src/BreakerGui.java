@@ -1,12 +1,13 @@
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 
 /**
  * Created for Breaker by Max on 14.11.2016.
@@ -14,33 +15,33 @@ import com.jgoodies.forms.layout.RowSpec;
 class BreakerGui implements ChangeListener, ActionListener {
 
 	private FractionTools tools = new FractionTools();
-	private JSpinner mNumerator1 = new JSpinner();
-	private JSpinner mNumerator2 = new JSpinner();
-	private JSpinner mDenominator1 = new JSpinner();
-	private JSpinner mDenominator2 = new JSpinner();
+	private JTextField mNumerator1 = new JTextField("1", 5);
+	private JTextField mNumerator2 = new JTextField("1", 5);
+	private JTextField mDenominator1 = new JTextField("1", 5);
+	private JTextField mDenominator2 = new JTextField("1", 5);
 	private JLabel mResultNumerator = new JLabel("0");
 	private JLabel mResultDenominator = new JLabel("0");
-	private String[] operations = { "+", "-", "×", "÷" };
-	private JComboBox<String> operatorsBox = new JComboBox(operations);
+	//private String[] operations = {"+", "-", "×", "÷"};
+	private JTextField operatorsBox = new JTextField("+", 3);
 
 	BreakerGui() {
 		JFrame frame = new JFrame("Breaker");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JLabel equals = new JLabel("=");
 		JPanel mFirstFractionPanel = new JPanel();
 		JPanel mSecondFractionPanel = new JPanel();
 		JPanel mResultPanel = new JPanel();
 
-		equals.setFont(equals.getFont().deriveFont(36f));
-		operatorsBox.setFont(operatorsBox.getFont().deriveFont(36f));
-		mNumerator1.setFont(mNumerator1.getFont().deriveFont(36f));
-		mNumerator2.setFont(mNumerator2.getFont().deriveFont(36f));
-		mDenominator1.setFont(mDenominator1.getFont().deriveFont(36f));
-		mDenominator2.setFont(mDenominator2.getFont().deriveFont(36f));
-		mResultNumerator.setAlignmentX(Component.CENTER_ALIGNMENT);
-		mResultNumerator.setFont(mResultNumerator.getFont().deriveFont(36f));
-		mResultDenominator.setAlignmentX(Component.CENTER_ALIGNMENT);
-		mResultDenominator.setFont(mResultDenominator.getFont().deriveFont(36f));
+		//equals.setFont(equals.getFont().deriveFont(36f));
+		//operatorsBox.setFont(operatorsBox.getFont().deriveFont(36f));
+		//mNumerator1.setFont(mNumerator1.getFont().deriveFont(36f));
+		//mNumerator2.setFont(mNumerator2.getFont().deriveFont(36f));
+		//mDenominator1.setFont(mDenominator1.getFont().deriveFont(36f));
+		//mDenominator2.setFont(mDenominator2.getFont().deriveFont(36f));
+		//mResultNumerator.setAlignmentX(Component.CENTER_ALIGNMENT);
+		//mResultNumerator.setFont(mResultNumerator.getFont().deriveFont(36f));
+		//mResultDenominator.setAlignmentX(Component.CENTER_ALIGNMENT);
+		//mResultDenominator.setFont(mResultDenominator.getFont().deriveFont(36f));
 
 		//operatorsBox.setMaximumSize(operatorsBox.getPreferredSize());
 		mNumerator1.setMaximumSize(new Dimension(100, 50));
@@ -48,23 +49,11 @@ class BreakerGui implements ChangeListener, ActionListener {
 		mDenominator1.setMaximumSize(new Dimension(100, 50));
 		mDenominator2.setMaximumSize(new Dimension(100, 50));
 
-		mNumerator1.addChangeListener(this);
-		mNumerator2.addChangeListener(this);
-		mDenominator1.addChangeListener(this);
-		mDenominator2.addChangeListener(this);
-
+		mNumerator1.addActionListener(this);
+		mNumerator2.addActionListener(this);
+		mDenominator1.addActionListener(this);
+		mDenominator2.addActionListener(this);
 		operatorsBox.addActionListener(this);
-		
-		((JLabel)operatorsBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-
-		SpinnerNumberModel denominatorModel1 = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
-		SpinnerNumberModel denominatorModel2 = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
-
-		mNumerator1.getModel().setValue(1);
-		mNumerator2.getModel().setValue(1);
-		mDenominator1.setModel(denominatorModel1);
-		mDenominator2.setModel(denominatorModel2);
-
 
 		JSeparator separator1 = new JSeparator(SwingConstants.HORIZONTAL);
 		separator1.setMaximumSize(new Dimension(150, 1));
@@ -91,21 +80,21 @@ class BreakerGui implements ChangeListener, ActionListener {
 		mFirstFractionPanel.setLayout(new BoxLayout(mFirstFractionPanel, BoxLayout.Y_AXIS));
 		mSecondFractionPanel.setLayout(new BoxLayout(mSecondFractionPanel, BoxLayout.Y_AXIS));
 		mResultPanel.setLayout(new BoxLayout(mResultPanel, BoxLayout.Y_AXIS));
-		mMainPanel.setLayout(new FormLayout(new ColumnSpec[] {
+		mMainPanel.setLayout(new FormLayout(new ColumnSpec[]{
 				ColumnSpec.decode("175px"),
 				ColumnSpec.decode("80px"),
 				ColumnSpec.decode("175px"),
 				ColumnSpec.decode("26px"),
 				ColumnSpec.decode("148px"),},
-			new RowSpec[] {
-				RowSpec.decode("102px"),}));
+				new RowSpec[]{
+						RowSpec.decode("102px"),}));
 
 		mMainPanel.add(mFirstFractionPanel, "1, 1, center, center");
 		mMainPanel.add(operatorsBox, "2, 1, center, center");
 		mMainPanel.add(mSecondFractionPanel, "3, 1, center, center");
 		mMainPanel.add(equals, "4, 1, left, center");
 		mMainPanel.add(mResultPanel, "5, 1, center, center");
-		
+
 		frame.getContentPane().add(mMainPanel);
 		frame.setSize(600, 480);
 		frame.setVisible(true);
@@ -125,42 +114,42 @@ class BreakerGui implements ChangeListener, ActionListener {
 
 	private void evaluate() {
 		Fraction result = new Fraction(0, 0);
-		switch (operatorsBox.getSelectedIndex()) {
-			case 0:
+		switch (operatorsBox.getText()) {
+			case "+":
 				result = tools.add(
 						new Fraction(
-								(int) mNumerator1.getModel().getValue(),
-								(int) mDenominator1.getModel().getValue()),
+								Integer.parseInt(mNumerator1.getText()),
+								Integer.parseInt(mDenominator1.getText())),
 						new Fraction(
-								(int) mNumerator2.getModel().getValue(),
-								(int) mDenominator2.getModel().getValue()));
+								Integer.parseInt(mNumerator2.getText()),
+								Integer.parseInt(mDenominator2.getText())));
 				break;
-			case 1:
+			case "-":
 				result = tools.subtract(
 						new Fraction(
-								(int) mNumerator1.getModel().getValue(),
-								(int) mDenominator1.getModel().getValue()),
+								Integer.parseInt(mNumerator1.getText()),
+								Integer.parseInt(mDenominator1.getText())),
 						new Fraction(
-								(int) mNumerator2.getModel().getValue(),
-								(int) mDenominator2.getModel().getValue()));
+								Integer.parseInt(mNumerator2.getText()),
+								Integer.parseInt(mDenominator2.getText())));
 				break;
-			case 2:
+			case "*":
 				result = tools.multiply(
 						new Fraction(
-								(int) mNumerator1.getModel().getValue(),
-								(int) mDenominator1.getModel().getValue()),
+								Integer.parseInt(mNumerator1.getText()),
+								Integer.parseInt(mDenominator1.getText())),
 						new Fraction(
-								(int) mNumerator2.getModel().getValue(),
-								(int) mDenominator2.getModel().getValue()));
+								Integer.parseInt(mNumerator2.getText()),
+								Integer.parseInt(mDenominator2.getText())));
 				break;
-			case 3:
+			case "/":
 				result = tools.divide(
 						new Fraction(
-								(int) mNumerator1.getModel().getValue(),
-								(int) mDenominator1.getModel().getValue()),
+								Integer.parseInt(mNumerator1.getText()),
+								Integer.parseInt(mDenominator1.getText())),
 						new Fraction(
-								(int) mNumerator2.getModel().getValue(),
-								(int) mDenominator2.getModel().getValue()));
+								Integer.parseInt(mNumerator2.getText()),
+								Integer.parseInt(mDenominator2.getText())));
 				break;
 		}
 		displayResult(result);
