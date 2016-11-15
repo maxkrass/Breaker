@@ -30,7 +30,6 @@ public class Fraction {
 				denominator /= i;
 				numerator /= i;
 				System.out.println("gekürzt mit " + i);
-				reduce();
 			}
 		}
 		System.out.print(denominator);
