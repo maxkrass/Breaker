@@ -4,6 +4,9 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
 
 /**
  * Created for Breaker by Max on 14.11.2016.
@@ -18,10 +21,11 @@ class BreakerGui implements ChangeListener, ActionListener {
 	private JLabel mResultNumerator = new JLabel("0");
 	private JLabel mResultDenominator = new JLabel("0");
 	private String[] operations = { "+", "-", "×", "÷" };
-	private JComboBox<String> operatorsBox = new JComboBox<>(operations);
+	private JComboBox<String> operatorsBox = new JComboBox(operations);
 
 	BreakerGui() {
 		JFrame frame = new JFrame("Breaker");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JLabel equals = new JLabel("=");
 		JPanel mFirstFractionPanel = new JPanel();
 		JPanel mSecondFractionPanel = new JPanel();
@@ -33,14 +37,16 @@ class BreakerGui implements ChangeListener, ActionListener {
 		mNumerator2.setFont(mNumerator2.getFont().deriveFont(36f));
 		mDenominator1.setFont(mDenominator1.getFont().deriveFont(36f));
 		mDenominator2.setFont(mDenominator2.getFont().deriveFont(36f));
+		mResultNumerator.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mResultNumerator.setFont(mResultNumerator.getFont().deriveFont(36f));
+		mResultDenominator.setAlignmentX(Component.CENTER_ALIGNMENT);
 		mResultDenominator.setFont(mResultDenominator.getFont().deriveFont(36f));
 
-		operatorsBox.setMaximumSize(operatorsBox.getPreferredSize());
-		mNumerator1.setMaximumSize(mNumerator1.getPreferredSize());
-		mNumerator2.setMaximumSize(mNumerator2.getPreferredSize());
-		mDenominator1.setMaximumSize(mDenominator1.getPreferredSize());
-		mDenominator2.setMaximumSize(mDenominator2.getPreferredSize());
+		//operatorsBox.setMaximumSize(operatorsBox.getPreferredSize());
+		mNumerator1.setMaximumSize(new Dimension(100, 50));
+		mNumerator2.setMaximumSize(new Dimension(100, 50));
+		mDenominator1.setMaximumSize(new Dimension(100, 50));
+		mDenominator2.setMaximumSize(new Dimension(100, 50));
 
 		mNumerator1.addChangeListener(this);
 		mNumerator2.addChangeListener(this);
@@ -48,18 +54,26 @@ class BreakerGui implements ChangeListener, ActionListener {
 		mDenominator2.addChangeListener(this);
 
 		operatorsBox.addActionListener(this);
+		
+		((JLabel)operatorsBox.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 
 		SpinnerNumberModel denominatorModel1 = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
 		SpinnerNumberModel denominatorModel2 = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
 
+		mNumerator1.getModel().setValue(1);
+		mNumerator2.getModel().setValue(1);
 		mDenominator1.setModel(denominatorModel1);
 		mDenominator2.setModel(denominatorModel2);
 
 
 		JSeparator separator1 = new JSeparator(SwingConstants.HORIZONTAL);
-		separator1.setMaximumSize(new Dimension(100, 1));
+		separator1.setMaximumSize(new Dimension(150, 1));
+		separator1.setForeground(Color.black);
+		separator1.setBackground(Color.BLACK);
 		JSeparator separator2 = new JSeparator(SwingConstants.HORIZONTAL);
-		separator2.setMaximumSize(new Dimension(100, 1));
+		separator2.setMaximumSize(new Dimension(150, 1));
+		separator2.setForeground(Color.black);
+		separator2.setBackground(Color.BLACK);
 
 		mFirstFractionPanel.add(mNumerator1);
 		mFirstFractionPanel.add(separator1);
@@ -74,17 +88,24 @@ class BreakerGui implements ChangeListener, ActionListener {
 		mResultPanel.add(mResultDenominator);
 
 		JPanel mMainPanel = new JPanel();
-		mMainPanel.setLayout(new BoxLayout(mMainPanel, BoxLayout.X_AXIS));
 		mFirstFractionPanel.setLayout(new BoxLayout(mFirstFractionPanel, BoxLayout.Y_AXIS));
 		mSecondFractionPanel.setLayout(new BoxLayout(mSecondFractionPanel, BoxLayout.Y_AXIS));
 		mResultPanel.setLayout(new BoxLayout(mResultPanel, BoxLayout.Y_AXIS));
+		mMainPanel.setLayout(new FormLayout(new ColumnSpec[] {
+				ColumnSpec.decode("175px"),
+				ColumnSpec.decode("80px"),
+				ColumnSpec.decode("175px"),
+				ColumnSpec.decode("26px"),
+				ColumnSpec.decode("148px"),},
+			new RowSpec[] {
+				RowSpec.decode("102px"),}));
 
-		mMainPanel.add(mFirstFractionPanel);
-		mMainPanel.add(operatorsBox);
-		mMainPanel.add(mSecondFractionPanel);
-		mMainPanel.add(equals);
-		mMainPanel.add(mResultPanel);
-
+		mMainPanel.add(mFirstFractionPanel, "1, 1, center, center");
+		mMainPanel.add(operatorsBox, "2, 1, center, center");
+		mMainPanel.add(mSecondFractionPanel, "3, 1, center, center");
+		mMainPanel.add(equals, "4, 1, left, center");
+		mMainPanel.add(mResultPanel, "5, 1, center, center");
+		
 		frame.getContentPane().add(mMainPanel);
 		frame.setSize(600, 480);
 		frame.setVisible(true);

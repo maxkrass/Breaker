@@ -33,8 +33,8 @@ public class Fraction {
 				reduce();
 			}
 		}
-		System.out.println(denominator);
-		System.out.println("-");
+		System.out.print(denominator);
+		System.out.print("∕");
 		System.out.println(numerator);
 	}
 }
